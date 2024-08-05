@@ -1,0 +1,9 @@
+{
+    "main": "nenerobo.js",
+    "option": {
+        "apiLevel": 1,
+        "useUnifiedParams": false,
+        "useConsoleApi": false,
+        "useBabel": false
+    }
+}
