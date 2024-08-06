@@ -8,12 +8,19 @@ var msgCount = {
   _lab: 0,
 };
 
-// 메시지 토큰화
+/**
+ * 메시지 토큰화
+ * @param {String} msg 전달받은 메시지
+ * @returns {String[]?}
+ */
 exports.msgTokenizer = (msg) => {
   return !!msg ? msg.split(' ') : null;
 };
 
-// 배터리, 온도 상태
+/**
+ * 배터리, 온도 상태
+ * @param {Object} replier 응답 객체
+ */
 exports.neneroboStatus = (replier) => {
   var status = {
     batteryLevel: Device.getBatteryLevel(),
@@ -28,7 +35,11 @@ exports.neneroboStatus = (replier) => {
   replier.reply(resultMsg);
 };
 
-// 메시지 자동 읽음 처리
+/**
+ * 메시지 자동 읽음 처리
+ * @param {String} room 방 이름
+ * @param {Object} replier 응답 객체
+ */
 exports.autoRead = (room, replier) => {
   var roomList = Object.getOwnPropertyNames(msgCount);
   var maxCount = 300;

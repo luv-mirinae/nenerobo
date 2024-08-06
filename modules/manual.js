@@ -1,4 +1,8 @@
-// 명령어 목록
+/**
+ * 명령어 목록
+ * @param {String} botName 봇 이름
+ * @param {Object} replier 응답 객체
+ */
 exports.usage = (botName, replier) => {
   var resultMsg = '[네네로보 명령어]\n\n';
   resultMsg += '▼ 아래 버튼을 클릭하세요. ▼\n' + '\u200b'.repeat(500) + '\n';
