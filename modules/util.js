@@ -1,14 +1,10 @@
 /**
  * @typedef {Object} msgCount 채팅방의 메시지 카운트를 저장하는 객체
  * @property {Number} _sweet 이름이 _sweet인 채팅방
- * @property {Number} _bakery 이름이 _bakery인 채팅방
- * @property {Number} _tofu 이름이 _tofu인 채팅방
  * @property {Number} _lab 이름이 _lab인 채팅방
  */
 var msgCount = {
   _sweet: 0,
-  _bakery: 0,
-  _tofu: 0,
   _lab: 0,
 };
 

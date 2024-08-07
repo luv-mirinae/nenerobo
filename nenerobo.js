@@ -14,10 +14,12 @@
 const scriptName = 'nenerobo';
 const botName = '!네네로보';
 
+// Java 패키지 로드
+importPackage(org.jsoup);
+
 // 모듈 로드
 const _manual = require('manual');
 const _util = require('util');
-const _weather = require('weather');
 
 /**
  * @param {String} room 채팅방 이름
@@ -45,9 +47,6 @@ const response = (room, msg, sender, isGroupChat, replier, imageDB, packageName,
       // !네네로보 상태
       if (messages.length === 2 && messages[1] === '상태') {
         _util.neneroboStatus(replier);
-      }
-      if (messages.length === 3 && messages[1] === '날씨') {
-        _weather.show(replier, messages[2]);
       }
     } else {
       // 그룹 채팅방에서 일반 메시지 수신 시 실행
