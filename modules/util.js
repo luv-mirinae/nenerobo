@@ -8,6 +8,8 @@ var msgCount = {
   _lab: 0,
 };
 
+const filePath = '/sdcard/msgbot/Bots/nenerobo/files/';
+
 /**
  * 메시지 토큰화
  * @param {String} msg 전달받은 메시지
@@ -53,4 +55,12 @@ exports.autoRead = (room, replier) => {
   } else {
     Log.error(`[E] 메시지를 읽음 처리할 채팅방 ${room}을(를) 찾을 수 없습니다.`);
   }
+};
+
+/**
+ * files 디렉토리의 절대 경로 반환
+ * @returns {String}
+ */
+exports.getFilePath = () => {
+  return filePath;
 };
