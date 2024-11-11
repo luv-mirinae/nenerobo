@@ -5,6 +5,8 @@
  * @license AGPL-3.0
  */
 
+'use strict';
+
 const messageTokenizer = (message) => {
   const messageArray = message.split(' ');
   // result = { command: ?string, message: ?string[] }
@@ -63,8 +65,23 @@ const isFileExists = (path) => {
   return !!FileStream.read(path);
 };
 
+const messageLogging = (path, event) => {
+  const room = event.room.name;
+  const fullPath = `${path}/${room}/${moduleUtil.getCurrentDate()}.csv`;
+  if (!moduleUtil.isFileExists(fullPath)) {
+    FileStream.write(fullPath, `date,id,name,message\n`);
+  }
+  let message = `"${moduleUtil.getCurrentDate()} ${moduleUtil.getCurrentTime()}"`;
+  message += `,"${event.sender.id}"`;
+  message += `,"${event.sender.name}"`;
+  message += `,"${event.message.replace(/(\r\n|\n|\r)/gm, '¶')}"\n`;
+
+  FileStream.append(fullPath, message);
+};
+
 exports.messageTokenizer = messageTokenizer;
 exports.getDeviceStatus = getDeviceStatus;
 exports.getCurrentDate = getCurrentDate;
 exports.getCurrentTime = getCurrentTime;
 exports.isFileExists = isFileExists;
+exports.messageLogging = messageLogging;
