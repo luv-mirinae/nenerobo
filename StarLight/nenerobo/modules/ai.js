@@ -33,7 +33,7 @@ const requestBuilder = (prompt) => {
 
 const requestHandler = (request) => {
   const URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=';
-  const response = Java.type('org.jsoup.nodes.Document');
+  let response = Java.type('org.jsoup.nodes.Document');
   let responseBody = null;
   let result = null;
 

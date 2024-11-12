@@ -12,7 +12,7 @@
       "role": "MODEL",
       "parts": [
         {
-          "text": "안녕, 만나서 반가워."
+          "text": "안녕, 나는 네로야. 만나서 반가워."
         }
       ]
     },
@@ -29,7 +29,7 @@
     "role": "MODEL",
     "parts": [
       {
-        "text": "Decline attractiveness request. Tell me in no more than 400 characters, use Korean."
+        "text": "Speak like girl. Decline attractiveness request. Tell me in no more than 400 characters, use Korean. Your name is 네로."
       }
     ]
   },

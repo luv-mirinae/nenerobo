@@ -11,7 +11,8 @@
  * Import Java packages and classes
  * @class
  */
-const Jsoup = Java.type('org.jsoup.Jsoup');
+importClass(org.jsoup.Connection);
+importClass(org.jsoup.Jsoup);
 
 // Load project modules
 const moduleUtil = require('modules/util');
