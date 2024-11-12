@@ -31,9 +31,9 @@ const LOG_FILE_PATH = '/sdcard/StarLight/projects/nenerobo/message_logs';
 function onMessage(event) {
   moduleUtil.messageLogging(LOG_FILE_PATH, event);
   autoRead(event);
-
   const messages = moduleUtil.messageTokenizer(event.message);
-  if (event.room.isGroupChat && Object.getOwnPropertyNames(rooms).includes(event.room.name)) {
+  const roomNameArray = Object.getOwnPropertyNames(rooms);
+  if (event.room.isGroupChat && roomNameArray.includes(event.room.name) && rooms[event.room.name].isActive) {
     // 그룹 채팅방에서 명령어 수신
     if (messages.command === BOT_NAME) {
       if (messages.message.length === 1 && messages.message[0] === '상태') {
