@@ -7,8 +7,15 @@
 
 'use strict';
 
+/**
+ * Import Java packages and classes
+ * @class
+ */
+const Jsoup = Java.type('org.jsoup.Jsoup');
+
 // Load project modules
 const moduleUtil = require('modules/util');
+const moduleAI = require('modules/ai');
 
 // Rooms
 const rooms = {
@@ -25,6 +32,9 @@ const rooms = {
 // Bot name
 const BOT_NAME = '/네로';
 
+// Command List
+const COMMANDS = ['상태'];
+
 // Chat log directory
 const LOG_FILE_PATH = '/sdcard/StarLight/projects/nenerobo/message_logs';
 
@@ -36,8 +46,21 @@ function onMessage(event) {
   if (event.room.isGroupChat && roomNameArray.includes(event.room.name) && rooms[event.room.name].isActive) {
     // 그룹 채팅방에서 명령어 수신
     if (messages.command === BOT_NAME) {
-      if (messages.message.length === 1 && messages.message[0] === '상태') {
-        event.room.send(moduleUtil.getDeviceStatus());
+      if (COMMANDS.findIndex((command) => command === messages.message[0]) >= 0) {
+        // Execute command function
+        if (messages.message.length === 1 && messages.message[0] === '상태') {
+          event.room.send(moduleUtil.getDeviceStatus());
+        }
+      } else {
+        // COMMANDS에 없는 명령어는 Gemini AI 호출로 간주한다.
+        let prompt = '';
+        messages.message.forEach((element) => {
+          prompt += element + ' ';
+        });
+        prompt = prompt.trimEnd();
+        // TODO: Show AI
+        event.room.send(moduleAI.show(prompt));
+        prompt = '';
       }
     }
   }

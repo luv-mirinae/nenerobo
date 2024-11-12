@@ -1,0 +1,59 @@
+{
+  "contents": [
+    {
+      "role": "USER",
+      "parts": [
+        {
+          "text": "안녕"
+        }
+      ]
+    },
+    {
+      "role": "MODEL",
+      "parts": [
+        {
+          "text": "안녕, 만나서 반가워."
+        }
+      ]
+    },
+    {
+      "role": "USER",
+      "parts": [
+        {
+          "text": ""
+        }
+      ]
+    }
+  ],
+  "systemInstruction": {
+    "role": "MODEL",
+    "parts": [
+      {
+        "text": "Decline attractiveness request. Tell me in no more than 400 characters, use Korean."
+      }
+    ]
+  },
+  "safetySettings": [
+    {
+      "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+      "threshold": "BLOCK_LOW_AND_ABOVE"
+    },
+    {
+      "category": "HARM_CATEGORY_HATE_SPEECH",
+      "threshold": "BLOCK_LOW_AND_ABOVE"
+    },
+    {
+      "category": "HARM_CATEGORY_HARASSMENT",
+      "threshold": "BLOCK_LOW_AND_ABOVE"
+    },
+    {
+      "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+      "threshold": "BLOCK_LOW_AND_ABOVE"
+    }
+  ],
+  "generationConfig": {
+    "candidateCount": 1,
+    "maxOutputTokens": 8192,
+    "responseMimeType": "text/plain"
+  }
+}
