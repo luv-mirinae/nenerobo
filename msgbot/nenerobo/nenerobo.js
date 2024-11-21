@@ -67,7 +67,7 @@ const onCommand = (message) => {
       if (rooms[message.room].isActive && !!message.command && message.command === BOT_NAME) {
         if (COMMANDS.findIndex((command) => command === message.args[0]) >= 0) {
           // Demo: Show current date and time
-          if (message.args[0] === '지금') {
+          if (message.args[0] === '지금' && message.args.length === 1) {
             currentDateTime(message);
           }
         } else {
@@ -80,7 +80,7 @@ const onCommand = (message) => {
     if (message.author.name === ADMIN_NAME && !!message.command && message.command === BOT_NAME) {
       if (COMMANDS.findIndex((command) => command === message.args[0]) >= 0) {
         // Demo: Show current date and time
-        if (message.args[0] === '지금') {
+        if (message.args[0] === '지금' && message.args.length === 1) {
           currentDateTime(message);
         }
       } else {
