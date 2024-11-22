@@ -13,11 +13,11 @@ bot.setCommandPrefix('/');
 
 /** @class */
 // Load Java classes
-const _Jsoup = importClass(org.jsoup.Jsoup);
 
 /** @module */
 // Load modules
 const _util = require('util');
+const _ai = require('ai');
 
 /** @constant */
 // Global constants
@@ -111,7 +111,18 @@ const commonActions = (message) => {
     message.reply(_util.getDeviceStatus(Device).text);
   }
 };
-const commonAIActions = (message) => {};
+const commonAIActions = (message) => {
+  let prompt = ``;
+  message.args.forEach((element) => {
+    prompt += `${element} `;
+  });
+  prompt = prompt.trimEnd();
+  const response = _ai.showGPT(FileStream, prompt);
+  if (DEBUG_MODE) {
+    Log.debug(`_ai.showGPT(): ${JSON.stringify(response)}`);
+  }
+  message.reply(response.text);
+};
 /**
  * GroupChat Bot Actions
  */
