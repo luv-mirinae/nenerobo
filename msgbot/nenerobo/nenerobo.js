@@ -69,25 +69,24 @@ const onCommand = (message) => {
     if (resultCheckRoom.isExists) {
       if (rooms[message.room].isActive && !!message.command && message.command === BOT_NAME) {
         if (COMMANDS.findIndex((command) => command === message.args[0]) >= 0) {
-          /** BOT ACTIONS */
-          if (message.args[0] === '정보' && message.args.length === 1) {
-            message.reply(_util.getDeviceStatus(Device).text);
-          }
+          commonActions(message);
+          groupChatActions(message);
         } else {
-          // TODO: Execute AI function
+          commonAIActions(message);
         }
       }
     }
   } else {
     // 1:1 chat
-    if (message.author.name === ADMIN_NAME && !!message.command && message.command === BOT_NAME) {
+    if (!!message.command && message.command === BOT_NAME) {
       if (COMMANDS.findIndex((command) => command === message.args[0]) >= 0) {
-        /** BOT ACTIONS */
-        if (message.args[0] === '정보' && message.args.length === 1) {
-          message.reply(_util.getDeviceStatus(Device).text);
+        if (message.author.name === ADMIN_NAME) {
+          SingleChatAdminActions(message);
         }
+        commonActions(message);
+        SingleChatActions(message);
       } else {
-        // TODO: Execute AI function
+        commonAIActions(message);
       }
     }
   }
@@ -104,6 +103,24 @@ const autoRead = (message) => {
     }
   }
 };
+/**
+ * Common Bot Actions
+ */
+const commonActions = (message) => {
+  if (message.args[0] === '정보' && message.args.length === 1) {
+    message.reply(_util.getDeviceStatus(Device).text);
+  }
+};
+const commonAIActions = (message) => {};
+/**
+ * GroupChat Bot Actions
+ */
+const groupChatActions = (message) => {};
+/**
+ * SingleChat Bot Actions
+ */
+const SingleChatActions = (message) => {};
+const SingleChatAdminActions = (message) => {};
 
 // Add listeners
 bot.addListener(Event.MESSAGE, onMessage);
