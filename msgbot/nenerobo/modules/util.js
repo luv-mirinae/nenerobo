@@ -8,7 +8,7 @@
 'use strict';
 
 /** @function */
-// Check room is exists
+// Check is room exists
 const checkRoom = (room, rooms) => {
   const result = {
     isExists: false,
@@ -45,7 +45,33 @@ const getCurrentTime = () => {
   result.time = `${hour}:${minute}:${second}`;
   return result;
 };
+// Check is file exists
+const checkFileExists = (FileStream, path) => {
+  const result = {
+    isExist: false,
+  };
+  if (!!FileStream.read(path)) {
+    result.isExist = true;
+  }
+  return result;
+};
+// Logging messages
+const messageLogging = (FileStream, path, message) => {
+  const room = message.room;
+  const fullPath = `${path}/${room}/${this.getCurrentDate().date}.csv`;
+  if (!this.checkFileExists(FileStream, fullPath).isExist) {
+    FileStream.write(fullPath, `date,id,name,message\n`);
+  }
+  let _message = `"${this.getCurrentDate().date} ${this.getCurrentTime().time}"`;
+  _message += `,"${message.author.hash}"`;
+  _message += `,"${message.author.name}"`;
+  _message += `,"${message.content.replace(/(\r\n|\n|\r)/gm, '¶')}"\n`;
+
+  FileStream.append(fullPath, _message);
+};
 
 exports.checkRoom = checkRoom;
 exports.getCurrentDate = getCurrentDate;
 exports.getCurrentTime = getCurrentTime;
+exports.checkFileExists = checkFileExists;
+exports.messageLogging = messageLogging;

@@ -40,6 +40,8 @@ const BOT_NAME = '네로';
 const COMMANDS = ['지금'];
 // DEBUG_MODE = boolean
 const DEBUG_MODE = true;
+// LOG_FILE_PATH = string
+const LOG_FILE_PATH = '/sdcard/msgbot/Bots/nenerobo/message_logs';
 
 /** @var */
 // Global variables
@@ -49,11 +51,12 @@ const DEBUG_MODE = true;
 const onMessage = (message) => {
   const resultCheckRoom = _util.checkRoom(message.room, rooms);
   if (DEBUG_MODE) {
-    Log.debug(`${JSON.stringify(resultCheckRoom)}`);
+    Log.debug(`resultCheckRoom: ${JSON.stringify(resultCheckRoom)}`);
   }
   if (message.isGroupChat) {
     // Group chat
     if (resultCheckRoom.isExists) {
+      _util.messageLogging(FileStream, LOG_FILE_PATH, message);
       autoRead(message);
     }
   }
@@ -107,7 +110,7 @@ const currentDateTime = (message) => {
   const getCurDateResult = _util.getCurrentDate();
   const getCurTimeResult = _util.getCurrentTime();
   if (DEBUG_MODE) {
-    Log.debug(`${JSON.stringify(getCurDateResult)}\n${JSON.stringify(getCurTimeResult)}`);
+    Log.debug(`currentDateTime(): ${JSON.stringify(getCurDateResult)}\n${JSON.stringify(getCurTimeResult)}`);
   }
   message.reply(`${getCurDateResult.date} ${getCurTimeResult.time}`);
 };
