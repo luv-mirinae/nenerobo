@@ -69,9 +69,27 @@ const messageLogging = (FileStream, path, message) => {
 
   FileStream.append(fullPath, _message);
 };
+// Device status
+const getDeviceStatus = (Device) => {
+  const result = {
+    text: ``,
+  };
+  const status = {
+    getBatteryLevel: Device.getBatteryLevel(),
+    getBatteryTemperature: Device.getBatteryTemperature(),
+    isCharging: Device.isCharging(),
+  };
+  result.text =
+    `◈ 정보 ◈\n\n` +
+    `🔋 배터리 잔량: ${status.getBatteryLevel}%\n` +
+    `🌡️ 배터리 온도: ${Math.floor(status.getBatteryTemperature / 10)} ℃\n` +
+    `⚡ 충전 상태: ${status.isCharging ? '충전 중' : '방전 중'}`;
+  return result;
+};
 
 exports.checkRoom = checkRoom;
 exports.getCurrentDate = getCurrentDate;
 exports.getCurrentTime = getCurrentTime;
 exports.checkFileExists = checkFileExists;
 exports.messageLogging = messageLogging;
+exports.getDeviceStatus = getDeviceStatus;

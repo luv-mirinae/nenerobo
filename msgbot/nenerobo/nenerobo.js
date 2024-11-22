@@ -37,7 +37,7 @@ const ADMIN_NAME = 'DEBUG SENDER';
 // BOT_NAME = string
 const BOT_NAME = '네로';
 // COMMANDS = [ ...string ]
-const COMMANDS = ['지금'];
+const COMMANDS = ['정보'];
 // DEBUG_MODE = boolean
 const DEBUG_MODE = true;
 // LOG_FILE_PATH = string
@@ -69,9 +69,9 @@ const onCommand = (message) => {
     if (resultCheckRoom.isExists) {
       if (rooms[message.room].isActive && !!message.command && message.command === BOT_NAME) {
         if (COMMANDS.findIndex((command) => command === message.args[0]) >= 0) {
-          // Demo: Show current date and time
-          if (message.args[0] === '지금' && message.args.length === 1) {
-            currentDateTime(message);
+          /** BOT ACTIONS */
+          if (message.args[0] === '정보' && message.args.length === 1) {
+            message.reply(_util.getDeviceStatus(Device).text);
           }
         } else {
           // TODO: Execute AI function
@@ -82,9 +82,9 @@ const onCommand = (message) => {
     // 1:1 chat
     if (message.author.name === ADMIN_NAME && !!message.command && message.command === BOT_NAME) {
       if (COMMANDS.findIndex((command) => command === message.args[0]) >= 0) {
-        // Demo: Show current date and time
-        if (message.args[0] === '지금' && message.args.length === 1) {
-          currentDateTime(message);
+        /** BOT ACTIONS */
+        if (message.args[0] === '정보' && message.args.length === 1) {
+          message.reply(_util.getDeviceStatus(Device).text);
         }
       } else {
         // TODO: Execute AI function
@@ -103,16 +103,6 @@ const autoRead = (message) => {
       Log.debug(`autoRead(): ${message.room}`);
     }
   }
-};
-/** Bot actions */
-// Demo: Show current date and time
-const currentDateTime = (message) => {
-  const getCurDateResult = _util.getCurrentDate();
-  const getCurTimeResult = _util.getCurrentTime();
-  if (DEBUG_MODE) {
-    Log.debug(`currentDateTime(): ${JSON.stringify(getCurDateResult)}\n${JSON.stringify(getCurTimeResult)}`);
-  }
-  message.reply(`${getCurDateResult.date} ${getCurTimeResult.time}`);
 };
 
 // Add listeners
